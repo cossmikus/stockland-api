@@ -1,0 +1,41 @@
+{
+  "name": "stockland-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "start": "node dist/main.js",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "crank": "tsx src/workers/crank.ts",
+    "check:token2022": "tsx scripts/token2022-check.ts",
+    "check:depth": "tsx scripts/depth-test.ts",
+    "init:program": "tsx scripts/init-program.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.31.1",
+    "@fastify/cors": "^10.0.1",
+    "@solana/spl-token": "^0.1.8",
+    "@solana/web3.js": "^0.0.3",
+    "bs58": "^6.0.0",
+    "drizzle-orm": "^0.45.3",
+    "fastify": "^5.1.0",
+    "node-cron": "^4.6.0",
+    "pino": "^9.5.0",
+    "postgres": "^3.4.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/node-cron": "^3.0.11",
+    "dotenv": "^16.4.7",
+    "drizzle-kit": "^0.31.11",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vitest": "^4.1.11"
+  }
+}

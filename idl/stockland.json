@@ -1,0 +1,1 @@
+{ "address": "StockLand111111111111111111111111111111111", "metadata": { "name": "stockland", "version": "0.1.0", "spec": "0.1.0", "description": "PLACEHOLDER — copy target/idl/stockland.json here after `anchor build` in the program repo" }, "instructions": [], "accounts": [], "types": [], "errors": [] }
