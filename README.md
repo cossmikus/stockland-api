@@ -80,6 +80,22 @@ npm run dev                        # API on :8787; CRANK_ENABLED=true runs the c
 | `GET /v1/epochs/current` | status and fills of the open epoch |
 | `POST /v1/admin/crank` | manual epoch turn (Bearer token) |
 
+## Evidence: what is proven, what is not yet
+
+We name what is tested rather than imply the whole path works. Each row links the exit criterion to the artefact that proves it. Rows without a link are pending; they will be filled in as the sprint runs.
+
+| Claim | Proof | Status |
+| --- | --- | --- |
+| Share accounting matches the on-chain program (first depositor 1:1, later depositors pro-rata, sell proceeds split, weights sum to 100, renormalisation when a mint is dropped) | ![Unit tests](docs/tests-passing.png) | passing, `npm test` |
+| A deposit is split by the profile weights before any swap | `GET /v1/epochs/current` after a devnet deposit, showing `buyUsdc` per asset | pending devnet deploy |
+| USDC actually reaches the program vault | Solscan link to the deposit transaction and the vault token account | pending devnet deploy |
+| $50 buys the target basket within 2% | `scripts/verify-basket.ts` output: target vs realised weight per asset, max drift, plus the `fills` table | pending mainnet round trip |
+| Withdraw in kind returns the real tokens | Solscan link showing seven Token-2022 transfers to the user's wallet in one transaction | pending mainnet round trip |
+| All-in cost under 50 bps | receipt from `/v1/positions/:owner`: estimated bps before signing, realised bps after execution | pending mainnet round trip |
+| Asset list locked from data | `depth/universe.json` committed with the $1k round-trip bps per mint | pending, mainnet market hours |
+
+What the unit-test screenshot does **not** prove: that the program compiles, that Jupiter routes exist for every mint, or that Token-2022 transfer hooks accept a program-owned vault. Those are the three things the next steps exist to find out.
+
 ## Status
 
 Sprint 2, "real money moves". Domain tests pass. Devnet rehearsal in progress: deploy key funded, program build next. Mainnet round trip of $50 follows the depth test. Kamino sleeve, rebalancing and the dividend ledger are Sprint 3.
